@@ -16,13 +16,13 @@ app.use(express.urlencoded({extended: true}));
 
 app.post('/sendTez', (req, res) => {
     
-    let data = JSON.parse(req.body);
-    if (data.amount == null || data.address == null) {
+    console.log(req.body)
+    if (req.body.amount == null || req.body.address == null) {
         return res.status(400).send("Invalid request: missing params.");
       }
 
-    console.log(`Transfering ${data.amount} ꜩ to ${data.address}...`);
-    Tezos.contract.transfer({ to: data.address, amount: parseFloat(data.amount) })
+    console.log(`Transfering ${req.body.amount} ꜩ to ${req.body.address}...`);
+    Tezos.contract.transfer({ to: req.body.address, amount: parseFloat(req.body.amount) })
     .then(op => {
         console.log(`Waiting for ${op.hash} to be confirmed...`);
         return op.confirmation(1).then(() => op.hash);
