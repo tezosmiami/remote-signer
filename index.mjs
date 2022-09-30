@@ -6,7 +6,9 @@ import "dotenv/config";
 
 const Tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev/');
 Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey(process.env.SIGNING_KEY) });
-const port =  process.env.PORT || 2727;
+
+const port =  process.env.PORT || 3000;
+
 const app = express();
 app.use(express.json());
 app.use(cors());
