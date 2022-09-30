@@ -6,7 +6,7 @@ import "dotenv/config";
 
 const Tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev/');
 Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey(process.env.SIGNING_KEY) });
-const port =  2727;
+const port =  process.env.PORT || 2727;
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -27,5 +27,5 @@ app.post('/send', (req, res) => {
 
 app.listen(port, function(err){
     if (err) console.log(err);
-    console.log("Server listening on PORT", port);
+    console.log("Server listening: ", port);
 }); 
