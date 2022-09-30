@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.post('/sendTez', (req, res) => {
+app.post('/sendtez', (req, res) => {
     
     let data = req.headers['content-type'] == 'application/json' ? req.body 
         : parse.JSON(req.body) 
