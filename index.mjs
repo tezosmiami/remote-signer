@@ -12,7 +12,9 @@ const port =  process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 app.post('/sendTez', (req, res) => {
+    console.log(req)
     if (req.body.amount == null || req.body.address == null) {
         return res.status(400).send("Invalid request: missing params.");
       }
