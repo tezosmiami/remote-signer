@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.post('/sendTez', (req, res) => {
+app.post('/sendtez', (req, res) => {
     
     console.log("body: ", req.body)
     if (req.body.amount == null || req.body.address == null) {
