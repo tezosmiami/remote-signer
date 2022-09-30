@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.post('/sendTez', (req, res) => {
+    console.log(req)
     if (req.body.amount == null || req.body.address == null) {
         return res.status(400).send("Invalid request: missing params.");
       }
