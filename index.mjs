@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 
+
 const Tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev/');
 Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey(process.env.SIGNING_KEY) });
 
@@ -14,15 +15,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.post('/sendtez', (req, res) => {
+app.post('/sendTez', (req, res) => {
     
-    console.log("body: ", req.body)
-    if (req.body.amount == null || req.body.address == null) {
+    let data = req.headers['content-type'] == 'application/json' ? req.body 
+        : parse.JSON(req.body) 
+    if (data.amount == null || data.address == null) {
         return res.status(400).send("Invalid request: missing params.");
       }
 
-    console.log(`Transfering ${req.body.amount} ꜩ to ${req.body.address}...`);
-    Tezos.contract.transfer({ to: req.body.address, amount: parseFloat(req.body.amount) })
+    console.log(`Transfering ${data.amount} ꜩ to ${data.address}...`);
+    Tezos.contract.transfer({ to: data.address, amount: parseFloat(data.amount) })
     .then(op => {
         console.log(`Waiting for ${op.hash} to be confirmed...`);
         return op.confirmation(1).then(() => op.hash);
