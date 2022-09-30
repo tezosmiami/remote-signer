@@ -11,9 +11,7 @@ const app = express();
 app.use(express.json());
 
 
-app.use(cors({
-    origin: '*'
-}));
+app.use(cors());
 
 app.post("/send", async function (req, res) {
     if (req.body.amount == null) {
