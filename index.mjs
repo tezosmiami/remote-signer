@@ -28,3 +28,5 @@ app.post("/send", async function (req, res) {
     .then(hash => {console.log(`${hash}`), res.json({hash:hash})})
     .catch(error => {console.log(`Error: ${error} ${JSON.stringify(error, null, 2)}`), handle_error(res, req, `Error: ${error} ${JSON.stringify(error, null, 2)}`)});
 });
+
+app.listen(port);
