@@ -10,7 +10,7 @@ const port =  process.env.PORT || 2727;
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.post('/send', (req, res) => {
+app.post('/sendTez', (req, res) => {
     if (req.body.amount == null || req.body.address == null) {
         return res.status(400).send("Invalid request: missing params.");
       }
