@@ -37,7 +37,7 @@ app.post('/sendObjkt', (req, res) => {
     
      let data = req.body 
    
-     if (data.address == null || data.token_id == null) {
+     if (data.address.length != 36 || data.token_id == null) {
          return res.status(400).send("Invalid request: missing params.");
        }
     console.log(data.token_id)
