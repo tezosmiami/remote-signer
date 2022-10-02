@@ -5,7 +5,7 @@ import cors from "cors";
 import "dotenv/config";
 
 
-const Tezos = new TezosToolkit('https://kathmandunet.tezos.marigold.dev/');
+const Tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev/');
 Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey(process.env.SIGNING_KEY) });
 
 const port =  process.env.PORT || 3000;
@@ -40,7 +40,7 @@ app.post('/sendObjkt', (req, res) => {
      if (data.address.length != 36 || data.token_id == null) {
          return res.status(400).send("Invalid request: missing params.");
        }
-     const params = [{from_: 'tz1XRPyYPj85qUmY9uHRp6JeAHBrKuLvLUni', txs: [{to_: data.address, token_id: 0, amount: 1}]}]
+     const params = [{from_: 'tz1XRPyYPj85qUmY9uHRp6JeAHBrKuLvLUni', txs: [{to_: data.address, token_id: data.token_id, amount: 1}]}]
      console.log(`Transfering Objkt to ${data.address}...`);
      Tezos.contract
      .at('KT18shTEJc8wGGtyuVmLcBvmU2rUYCRLeCqe')
@@ -54,7 +54,7 @@ app.post('/sendObjkt', (req, res) => {
       console.log(`Waiting for ${op.hash} to be confirmed...`);
       return op.confirmation(1).then(() => op.hash);
     })
-    .then((hash) => console.log(`Operation injected: https://kathmandu.tzstats.com/${hash}`))
+    .then((hash) => console.log(`Operation injected: https://ghost.tzstats.com/${hash}`))
     .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
      })
  });
