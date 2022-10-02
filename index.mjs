@@ -60,8 +60,8 @@ app.post('/sendObjkt', (req, res) => {
       console.log(`Waiting for ${op.hash} to be confirmed...`);
       return op.confirmation(1).then(() => op.hash);
     })
-    .then((hash) => console.log(`Operation injected: https://ghost.tzstats.com/${hash}`))
-    .catch((error) => console.log(`Error: ${JSON.stringify(error, null, 2)}`));
+    .then(hash => {console.log(`${hash}`), res.json({hash:hash})})
+    .catch(error => {console.log(`Error: ${error} ${JSON.stringify(error, null, 2)}`), res.send(error)});
      })
  });
 
