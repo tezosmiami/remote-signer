@@ -11,7 +11,13 @@ Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey(process.env.SIGNI
 const port =  process.env.PORT || 3000;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://www.tezoro.netlify.app/', 'https://www.tezorogame.tez.page',
+    'https://tezoro.netlify.app/', 'https://tezorogame.tez.page'
+  ]
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
