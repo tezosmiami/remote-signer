@@ -19,7 +19,7 @@ app.post('/sendTez', (req, res) => {
   
     let data = req.body 
   
-    if (data.amount == null || data.address == null) {
+    if (data.amount == null || data.address.length != 36) {
         return res.status(400).send("Invalid request: missing params.");
       }
 
@@ -42,7 +42,7 @@ app.post('/sendObjkt', (req, res) => {
        }
     console.log(data.token_id)
      const params = [{from_: 'tz1XRPyYPj85qUmY9uHRp6JeAHBrKuLvLUni', txs: [{to_: data.address, token_id: 0, amount: 1}]}]
-     console.log(`Transfering Objkt to ${data.to_}...`);
+     console.log(`Transfering Objkt to ${data.address}...`);
      Tezos.contract
      .at('KT18shTEJc8wGGtyuVmLcBvmU2rUYCRLeCqe')
      .then((c) => {
